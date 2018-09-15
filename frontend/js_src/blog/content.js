@@ -4,7 +4,7 @@ var layui = require('layui');
 var replyArr = new Array();
 
 window.onload = function(){
-    //SocketConnect(close, SocketReceive, error);
+    SocketConnect(close, SocketReceive, error);
     var replyVue = new Vue({
         el: '#replyList',
         data: { replies: replyArr } 

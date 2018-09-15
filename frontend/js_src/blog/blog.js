@@ -4,7 +4,7 @@ var Vue = require('vue');
 var Cookies = require('cookies');
 
 window.onload = function(){
-    //SocketConnect(close, SocketReceive, error);
+    SocketConnect(close, SocketReceive, error);
     var bloglist;
     document.getElementById('menu-myblog').classList.add('layui-this');
     layui.use('laypage', function(){
