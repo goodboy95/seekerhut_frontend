@@ -71,7 +71,7 @@ window.onload = function(){
             }, function(resp){
                 if (resp.code === 0){
                     alert('博客上传成功！');
-                    location.href = '/blog/index/';
+                    location.href = '/page/blog/index/';
                 }
                 else{
                     alert(resp.msg);
