@@ -18,7 +18,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue': 'vue/dist/vue.js',
+            'vue': 'vue/dist/vue.min.js',
             'vue-router$': 'vue-router/dist/vue-router.common.js'
         }
     },

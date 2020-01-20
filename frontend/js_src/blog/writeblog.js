@@ -1,27 +1,27 @@
-var $ = require('jquery');
 var layui = require('layui');
 
 var tagArr = new Array();
 var contentBox;
-function tagDelete(){
+function tagDelete() {
     var tagName = event.srcElement.id;
     var index = tagArr.indexOf(tagName);
     tagArr.splice(index, 1);
     document.getElementById(tagName).remove();
 }
 
-window.onload = function(){
+window.onload = function() {
     SocketConnect(close, SocketReceive, error);
     document.getElementById('menu-writeblog').classList.add('layui-this');
 
-    layui.use(['layedit', 'layer'], function(){
+    layui.use(['layedit', 'layer'], function() {
         var layedit = layui.layedit;
         var layer = layui.layer;
         contentBox = layedit.build('content');
 
-        $.get('/api/blog/blog_list/', {userId: Cookies.get('id')}, function(resp){
-            if (resp.code === 0){
-                var tagList = resp.data.tagList;
+        axios.get('/api/blog/blog_list/', { params: { authorId: Cookies.get('id') } }).then(function(resp) {
+            var respData = resp.data;
+            if (respData.code === 0) {
+                var tagList = respData.data.tagList;
                 for (var i = 0; i < tagList.length; i++){
                     document.getElementById('tagList').innerHTML += `<option value=${tagList[i].tagName}>${tagList[i].tagName}</option>`;
                 }
@@ -29,16 +29,18 @@ window.onload = function(){
             else{
                 alert(resp.msg);
             }
+        }).catch(function(err){
+            console.error(err);
         });
     
-        document.getElementById('createTag').onclick = function(){
+        document.getElementById('createTag').onclick = function() {
             var tagName = document.getElementById('tagText').value;
             document.getElementById('tagList').innerHTML += `<option value=${tagName}>${tagName}</option>`;
             document.getElementById('tagText').value = '';
             alert('标签创建成功！');
         };
     
-        document.getElementById('addTag').onclick = function(){
+        document.getElementById('addTag').onclick = function() {
             layer.open({
                 type: 1,
                 title: '标签管理',
@@ -46,7 +48,7 @@ window.onload = function(){
             });
         };
     
-        document.getElementById('confirmAddTag').onclick = function(){
+        document.getElementById('confirmAddTag').onclick = function() {
             var tagList = document.getElementById('tagList');
             var index = tagList.selectedIndex;
             var tagName = tagList.options[index].text;
@@ -61,21 +63,23 @@ window.onload = function(){
             }
         };
         
-        document.getElementById('submit').onclick = function(){
-            $.post('/api/blog/blog/', {
+        document.getElementById('submit').onclick = function() {
+            axios.post('/api/blog/blog/', {
                 title: document.getElementById('title').value,
                 content: layedit.getContent(contentBox),
                 tags: tagArr,
                 privacy: 0,
-                __RequestVerificationToken: $('#token').find('input').val()
-            }, function(resp){
-                if (resp.code === 0){
+                __RequestVerificationToken: document.getElementById('token').value
+            }).then(function(resp) {
+                if (resp.code === 0) {
                     alert('博客上传成功！');
                     location.href = '/page/blog/index/';
                 }
-                else{
+                else {
                     alert(resp.msg);
                 }
+            }).catch(function(err) {
+                console.error(err);
             });
         };
     });
