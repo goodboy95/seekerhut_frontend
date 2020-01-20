@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var axios = require('axios');
 var layui = require('layui');
 
 var replyArr = new Array();
@@ -24,7 +24,7 @@ window.onload = function(){
         flow.load({
             elem: '#replyList',
             done: function(page, next){
-                $.get('/api/blog/replylist/', {blogID: id, pageNo: page, pageSize: 5}, function(resp){
+                axios.get('/api/blog/replylist/', {params: {blogID: id, pageNo: page, pageSize: 5}}).then(function(resp){
                     if (parseInt(resp.code) === 0) { 
                         replyNum = resp.data.ReplyNum;
                         var replyList = resp.data.ReplyList;
@@ -47,12 +47,12 @@ window.onload = function(){
         var replyContent = layedit.getContent(contentBox);
         var userName = Cookies.get('username');
         var authorID = document.getElementById('authorID').innerHTML;
-        $.post('/api/blog/reply/', {
+        axios.post('/api/blog/reply/', {
             blogAuthorID: authorID,
             blogID: id,
             content: replyContent,
             __RequestVerificationToken: $('#token').find('input').val()
-        }, function(resp){
+        }).then(function(resp){
             if (resp.code === 0){
                 alert('回复成功！');
                 if (!finalPage) { replyNum++; }

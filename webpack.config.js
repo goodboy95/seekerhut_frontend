@@ -1,6 +1,6 @@
 var path = require('path');
 var entryPath = require('./config_module/entry');
-const uglify = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     entry: entryPath,
@@ -36,10 +36,14 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
+            },
+            {
+                test: /\.css$/,
+                loader: 'css-loader',
             }
         ]
     },
     plugins: [
-        //new uglify()
+        new VueLoaderPlugin()
     ]
 };
