@@ -1,11 +1,10 @@
-var $ = require('jquery');
 var axios = require('axios');
 var Vue = require('vue');
 
 window.onload = function(){
     var queryStr = window.location.href.split('?')[1];
     var forumId = parseInt(queryStr.split('=')[1]);
-    axios.get('/api/forum/postList/', { params: {forumId: forumId, pageSize: 15, pageNum: 0} }).then(function(resp){
+    axios.get('/api/forum/postList/', { params: {forumId: forumId, pageSize: 15, pageNum: 1} }).then(function(resp){
         if (resp.data.Code === 0) {
             var postList = resp.data.Data;
             new Vue({

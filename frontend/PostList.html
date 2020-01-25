@@ -2,8 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/lib/layui/css/layui.css">
-        <script src="/lib/jquery.js"></script>
-        <script src="/lib/vue.js"></script>
+        <script src="/lib/vue.min.js"></script>
         <script src="/lib/layui/layui.js"></script>
         <script src="/lib/websocket.js"></script>
         <script src="/js/forum/postlist.js"></script>
@@ -28,7 +27,7 @@
         <ul id="postList">
             <li v-for="post in postlist">
                 <div class="post-link">
-                    <a :href="`/postInfo.html?postid=${post.id}`">{{post.name}}</a>
+                    <a href="`/PostInfo.html?postid=${post.id}`">{{post.title}}</a>
                 </div>
             </li>
         </ul>
