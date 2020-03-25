@@ -1,0 +1,13 @@
+version: '3'
+services:
+  webdb:
+    image: microsoft/dotnet:2.2-aspnetcore-runtime
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+    environment:
+      ASPNETCORE_ENVIRONMENT=Production
+networks:
+  backend:
+    driver: bridge

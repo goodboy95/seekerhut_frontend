@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mysqldb:
+    image: mysql:8.0.13
+    volume:
+      - D:/home/docker-compose/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    ports:
+      - 3306:3306
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=seekerhut
+      - MYSQL_PASSWORD=123456
+networks:
+  backend:
+    driver: bridge

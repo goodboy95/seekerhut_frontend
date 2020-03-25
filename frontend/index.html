@@ -27,7 +27,7 @@
         <ul id="forumList">
             <li v-for="forum in forumlist">
                 <div class="forum-link">
-                    <a href="`/PostList.html?forumid=${forum.id}`">{{forum.name}}</a>
+                    <a :href="`/PostList.html?forumid=${forum.id}`">{{forum.name}}</a>
                 </div>
             </li>
         </ul>

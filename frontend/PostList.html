@@ -27,7 +27,7 @@
         <ul id="postList">
             <li v-for="post in postlist">
                 <div class="post-link">
-                    <a href="`/PostInfo.html?postid=${post.id}`">{{post.title}}</a>
+                    <a :href="`/PostInfo.html?postid=${post.id}`">{{post.title}}</a>
                 </div>
             </li>
         </ul>

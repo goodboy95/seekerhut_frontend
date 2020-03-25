@@ -4,7 +4,7 @@ var Vue = require('vue');
 window.onload = function(){
     var queryStr = window.location.href.split('?')[1];
     var forumId = parseInt(queryStr.split('=')[1]);
-    axios.get('/api/forum/postList/', { params: {forumId: forumId, pageSize: 15, pageNum: 1} }).then(function(resp){
+    axios.get('/api/forum/postList/', { params: {forumId: forumId, pageIndex: 1, pageSize: 15} }).then(function(resp){
         if (resp.data.Code === 0) {
             var postList = resp.data.Data;
             new Vue({
@@ -28,6 +28,7 @@ window.onload = function(){
             content: content
         }).then(function(resp){
             console.log(JSON.stringify(resp));
+            location.reload();
         }).catch(function(err){
             console.error(err);
         });

@@ -1,0 +1,15 @@
+version: '3'
+services:
+  gitlab:
+    image: store/gitlab/gitlab-ce:10.2.4-ce.0
+    volume:
+    ports:
+      - '2222:22'
+      - '2080:80'
+      - '2443:443'
+    networks:
+      - backend
+    environment:
+networks:
+  backend:
+    driver: bridge
